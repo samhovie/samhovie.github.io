@@ -164,9 +164,78 @@ TODO:
 
   /* global d3 */
 
-// var margin = {top: 10, right: 30, bottom: 30, left: 40},
-//     width = 460 - margin.left - margin.right,
-//     height = 400 - margin.top - margin.bottom;
+var currentWidth_rt = document.getElementById("rt_chart").offsetWidth
+
+// set the dimensions and margins of the graph
+var margin_rt = {top: 10, right: 30, bottom: 30, left: 60},
+    width_rt = currentWidth_rt - margin_rt.left - margin_rt.right,
+    height_rt = (currentWidth_rt * 0.5) - margin_rt.top - margin_rt.bottom;
+
+// append the svg object to the body of the page
+var svg_rt = d3.select("#rt_chart")
+  .append("svg")
+    .attr("width", width_rt + margin_rt.left + margin_rt.right)
+    .attr("height", height_rt + margin_rt.top + margin_rt.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin_rt.left + "," + margin_rt.top + ")");
+
+
+d3.json("/data/rt.json").then(function(data) {
+    // filers NaN and converts strings
+    let parseDate = d3.timeParse("%m/%d/%Y");
+    data = data.filter(function(d){
+      if(isNaN(d.rt_median)){
+        return false;
+      }
+      d.rt_lower = +d.rt_lower;
+      d.rt_median = +d.rt_median;
+      d.rt_upper = +d.rt_upper;
+      d.date = parseDate(d.date);
+      return true;
+    });
+    
+    console.log(data)
+
+    // Add X axis --> it is a date format
+    var x_rt = d3.scaleTime()
+      .domain(d3.extent(data, function(d) { return d.date}))
+      .range([ 0, width_rt ]);
+    svg_rt.append("g")
+      .attr("transform", "translate(0," + height_rt + ")")
+      .call(d3.axisBottom(x_rt));
+
+    // Add Y axis
+    var y_rt = d3.scaleLinear()
+      .domain([0, d3.max(data, function(d) { return d.rt_median; })])
+      .range([ height_rt, 0 ]);
+    svg_rt.append("g")
+      .call(d3.axisLeft(y_rt));
+
+    // Show confidence interval
+    svg_rt.append("path")
+      .datum(data.filter(function(d){return d.geography_modeled=="covidregion_1"}))
+      .attr("fill", "#cce5df")
+      .attr("stroke", "none")
+      .attr("d", d3.area()
+        .x(function(d) { return x_rt(d.date) })
+        .y0(function(d) { return y_rt(d.rt_lower) })
+        .y1(function(d) { return y_rt(d.rt_upper) })
+        )
+
+    // Add the line
+    svg_rt
+      .append("path")
+      .datum(data.filter(function(d){return d.geography_modeled=="covidregion_1"}))
+      .attr("fill", "none")
+      .attr("stroke", "steelblue")
+      .attr("stroke-width", 1.5)
+      .attr("d", d3.line()
+        .x(function(d) { return x_rt(d.date) })
+        .y(function(d) { return y_rt(d.rt_median) })
+        )
+
+});
 
   
   var currentWidth_cd = document.getElementById("cases_chart").offsetWidth
@@ -175,8 +244,8 @@ TODO:
       width_cases = currentWidth_cd - margin_cases.left - margin_cases.right,
       height_cases = (currentWidth_cd * 0.5) - margin_cases.top - margin_cases.bottom;
       
-      console.log(currentWidth_cd)
-      console.log(height_cases)
+      // console.log(currentWidth_cd)
+      // console.log(height_cases)
       
   var svg_cases = d3.select("#cases_chart")
     .append("svg")
