@@ -164,15 +164,15 @@ TODO:
 
   /* global d3 */
 
-var currentWidth_rt = document.getElementById("rt_chart").offsetWidth
+const currentWidth_rt = document.getElementById("rt_chart").offsetWidth
 
 // set the dimensions and margins of the graph
-var margin_rt = {top: 10, right: 30, bottom: 30, left: 60},
+const margin_rt = {top: 10, right: 30, bottom: 30, left: 60},
     width_rt = currentWidth_rt - margin_rt.left - margin_rt.right,
     height_rt = (currentWidth_rt * 0.5) - margin_rt.top - margin_rt.bottom;
 
 // append the svg object to the body of the page
-var svg_rt = d3.select("#rt_chart")
+const svg_rt = d3.select("#rt_chart")
   .append("svg")
     .attr("width", width_rt + margin_rt.left + margin_rt.right)
     .attr("height", height_rt + margin_rt.top + margin_rt.bottom)
@@ -198,7 +198,7 @@ d3.json("/data/rt.json").then(function(data) {
     console.log(data)
 
     // Add X axis --> it is a date format
-    var x_rt = d3.scaleTime()
+    const x_rt = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.date}))
       .range([ 0, width_rt ]);
     svg_rt.append("g")
@@ -206,7 +206,7 @@ d3.json("/data/rt.json").then(function(data) {
       .call(d3.axisBottom(x_rt));
 
     // Add Y axis
-    var y_rt = d3.scaleLinear()
+    const y_rt = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return d.rt_median; })])
       .range([ height_rt, 0 ]);
     svg_rt.append("g")
@@ -238,16 +238,16 @@ d3.json("/data/rt.json").then(function(data) {
 });
 
   
-  var currentWidth_cd = document.getElementById("cases_chart").offsetWidth
+  const currentWidth_cd = document.getElementById("cases_chart").offsetWidth
   
-  var margin_cases = {top: 10, right: 30, bottom: 30, left: 60},
+  const margin_cases = {top: 10, right: 30, bottom: 30, left: 60},
       width_cases = currentWidth_cd - margin_cases.left - margin_cases.right,
       height_cases = (currentWidth_cd * 0.5) - margin_cases.top - margin_cases.bottom;
       
       // console.log(currentWidth_cd)
       // console.log(height_cases)
       
-  var svg_cases = d3.select("#cases_chart")
+  const svg_cases = d3.select("#cases_chart")
     .append("svg")
       .attr("width", width_cases + margin_cases.left + margin_cases.right)
       .attr("height", height_cases + margin_cases.top + margin_cases.bottom)
@@ -256,11 +256,11 @@ d3.json("/data/rt.json").then(function(data) {
             "translate(" + margin_cases.left + "," + margin_cases.top + ")");
             
             
-  var margin_deaths = {top: 10, right: 30, bottom: 30, left: 40},
+  const margin_deaths = {top: 10, right: 30, bottom: 30, left: 40},
       width_deaths = currentWidth_cd - margin_deaths.left - margin_deaths.right,
       height_deaths = (currentWidth_cd * 0.5) - margin_deaths.top - margin_deaths.bottom;
       
-  var svg_deaths = d3.select("#deaths_chart")
+  const svg_deaths = d3.select("#deaths_chart")
     .append("svg")
       .attr("width", width_deaths + margin_deaths.left + margin_deaths.right)
       .attr("height", height_deaths + margin_deaths.top + margin_deaths.bottom)
@@ -270,7 +270,7 @@ d3.json("/data/rt.json").then(function(data) {
             
       
   // let url = 'https://docs.google.com/spreadsheet/ccc?key=' + key + '&output=csv'
-  let url = 'https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv'
+  const url = 'https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv'
   //Read the data
   d3.csv(url).then(function(data) {
     let parseDate = d3.timeParse("%m-%d-%Y");
@@ -285,7 +285,7 @@ d3.json("/data/rt.json").then(function(data) {
     console.log(data);
     
     // Add X axis --> it is a date format
-    var x_cases = d3.scaleTime()
+    const x_cases = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.update_date; }))
       .range([ 0, width_cases ]);
     svg_cases.append("g")
@@ -293,7 +293,7 @@ d3.json("/data/rt.json").then(function(data) {
       .call(d3.axisBottom(x_cases));
 
     // Add Y axis
-    var y_cases = d3.scaleLinear()
+    const y_cases = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return d.tests_pos; })])
       .range([ height_cases, 0 ]);
     svg_cases.append("g")
@@ -312,7 +312,7 @@ d3.json("/data/rt.json").then(function(data) {
         )
         
         // Add X axis --> it is a date format
-    var x_deaths = d3.scaleTime()
+    const x_deaths = d3.scaleTime()
       .domain(d3.extent(data, function(d) { return d.update_date; }))
       .range([ 0, width_deaths ]);
     svg_deaths.append("g")
@@ -320,7 +320,7 @@ d3.json("/data/rt.json").then(function(data) {
       .call(d3.axisBottom(x_deaths));
 
     // Add Y axis
-    var y_deaths = d3.scaleLinear()
+    const y_deaths = d3.scaleLinear()
       .domain([0, d3.max(data, function(d) { return d.deaths; })])
       .range([ height_deaths, 0 ]);
     svg_deaths.append("g")
@@ -339,6 +339,47 @@ d3.json("/data/rt.json").then(function(data) {
         )   
         
   });
+  
+  // function drawCharts() {
+      
+  //     var currentWidth = document.getElementById("rt_chart").offsetWidth - margin.left - margin.right;
+  //     // console.log(currentWidth)
+      
+  //     svg.attr("width", currentWidth + margin.left + margin.right)
+      
+  //     xTitle.attr("transform", "translate(" + (currentWidth/2) + " ," + (height -20) + ")")
+  //     yTitle.attr("x",0 - (height / 2))
+      
+  //     x.range([ 0, currentWidth ]);
+      
+  //     xAxis.attr("transform", "translate( "+margin.left+"," + (height-margin.top-margin.bottom) + ")")
+  //         .call(d3.axisBottom(x).ticks(5));
+           
+  //     interval
+  //     .attr("d", d3.area()
+  //     .x(function(d) { return x(d.date) })
+  //     .y0(function(d) { return y(d.rt_lower) })
+  //     .y1(function(d) { return y(d.rt_upper) }))
+      
+  //     line
+  //     .attr("d", d3.line()
+  //     .x(function(d) { return x(d.date) })
+  //     .y(function(d) { return y(d.rt_median) })
+  //     )
+      
+  //           refLine
+  //       .attr("d", d3.line()
+  //       .x(function(d) { return x(d.date) })
+  //       .y(function(d) { return y(1.0) }));
+      
+      
+
+  //   }
+  
+    
+  //   drawCharts();
+  //   // Add an event listener that run the function when dimension change
+  //   window.addEventListener('resize', drawChart );
     
 
     
