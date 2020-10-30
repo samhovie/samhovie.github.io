@@ -397,6 +397,7 @@ TODO:
       .attr("stroke", "black")
       .attr('r', 8.5)
       .style("opacity", 0)
+      .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
 
   // Create the text that travels along the curve of chart
   var focusText = svg_rt
@@ -405,6 +406,7 @@ TODO:
       .style("opacity", 0)
       .attr("text-anchor", "left")
       .attr("alignment-baseline", "middle")
+      .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
       
           function mouseover() {
     focus.style("opacity", 1)
@@ -414,9 +416,9 @@ TODO:
   function mousemove() {
     data = data.filter(function(d){return d.geography_modeled==allGroup[0]})
     // recover coordinate we need
-    console.log(d3.mouse(this))
+    console.log(d3.mouse(this)[0])
     var x0 = x_rt.invert(d3.mouse(this)[0]);
-    console.log(x0);
+    // console.log(x0);
     var i = bisect(data, x0, 1);
     console.log(i)
     
@@ -488,7 +490,8 @@ TODO:
         .attr('height', height)
         .on('mouseover', mouseover)
         .on('mousemove', mousemove)
-        .on('mouseout', mouseout); 
+        .on('mouseout', mouseout)
+        .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
         
 
 
