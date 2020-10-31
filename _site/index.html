@@ -17,7 +17,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.min.js" integrity="sha512-C2RveGuPIWqkaLAluvoxyiaN1XYNe5ss11urhZWZYBUA9Ydgj+hfGKPcxCzTwut1/fmjEZR7Ac35f2aycT8Ogw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-selection/1.2.0/d3-selection.min.js" integrity="sha512-P/PLNIojUNrUq2g5Q3NX8epp5X6KZmNvWV2pDGU+ZiU96YlqFhIrG0pkSZ/qgruT7uJ2Ok/vFN7/7brl4Y7ipw==" crossorigin="anonymous"></script>
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.10.0/d3.min.js"></script>-->
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-transition/1.1.1/d3-transition.min.js" integrity="sha512-9EoVFaJ1f642H4qLe+VUMu7CDqa1FQPdar1Pm76aS1AeesQoMdmm3NUZaZlJ1H/IEpwfS1Hbq41l/iUmhxq8jw==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-time/1.0.8/d3-time.min.js" integrity="sha512-UPE7yiWEYDz8P9wbryFMvk4XRktIUjV1Z5rQcmAsIgRelE9GAZ+6Z8jtGcaOUYEvz8aaoDWpDZXkhGbMkeWPQQ==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-collection/1.0.5/d3-collection.min.js" integrity="sha512-wYLIhsNaJ6cBEcFIgAtY0ncVV3KEzE95+32OfOdQJQkEfZVrWOn+N2woUPaBCuW8N6S7++72Y7XlOPZ/3U7X2w==" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-geo-projection/2.4.0/d3-geo-projection.min.js" integrity="sha512-GsBgCSYNatBlhNZQPrXtlHydWMCi+rl7QyR5Fs5kNwczI8XdKqZ7ZZ+yGnEfhvekkgSiAW0KGM5o7q+OHqhutQ==" crossorigin="anonymous"></script>
@@ -388,11 +388,17 @@ TODO:
   
   var dataFilter = null;               
   
-  d3.json("/data/rt.json").then(function(data) {
+  // d3.json("/data/rt.json").then(function(data) {
+  d3.csv('https://raw.githubusercontent.com/samhovie/sitefiles/main/nu_20201027.csv').then(function(data) {
+    // console.log(data);   
     // filers NaN and converts strings
-    let parseDate = d3.timeParse("%m/%d/%Y");
+    let parseDate = d3.timeParse("%Y-%m-%d");
+    let today = new Date();
     data = data.filter(function(d){
-      if(isNaN(d.rt_median)){
+      if(isNaN(d.rt_median) || 
+          d.scenario_name !== 'baseline' ||
+          parseDate(d.date) > today  
+          ){
         return false;
       }
       d.rt_lower = +d.rt_lower;
@@ -428,7 +434,7 @@ TODO:
     line_rt.datum(data.filter(function(d){return d.geography_modeled==allGroup[0]}))
                   .attr("stroke", function(d){ return myColor(allGroup[0]) })
                   .attr("transform", "translate(" +(margin_rt.left+1)+" ,0)") 
-                  .style("stroke-width", 4)
+                  .style("stroke-width", 2)
                   .style("fill", "none")
                   
                   
@@ -462,7 +468,7 @@ TODO:
     .append('circle')
       .style("fill", "none")
       .attr("stroke", "black")
-      .attr('r', 5.5)
+      .attr('r', 4.5)
       .style("opacity", 0)
       .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
 
@@ -484,18 +490,18 @@ TODO:
     data = data.filter(function(d){return d.geography_modeled==allGroup[0]})
     var formatTime = d3.timeFormat("%B %d")
     // recover coordinate we need
-    console.log(d3.mouse(this)[0])
+    // console.log(d3.mouse(this)[0])
     var x0 = x_rt.invert(d3.mouse(this)[0]);
     // console.log(x0);
     var i = bisect(data, x0, 1);
-    console.log(i)
+    // console.log(i)
     
     selectedData = data[i]
     focus
       .attr("cx", x_rt(selectedData.date))
       .attr("cy", y_rt(selectedData.rt_median))
     focusText
-      .html(" " + formatTime(selectedData.date) + "  -  " + "Rt:" + (selectedData.rt_median).toFixed(4))
+      .html("<br>" + formatTime(selectedData.date) + "  " + "Rt:" + (selectedData.rt_median).toFixed(4))
       .attr("x", x_rt(selectedData.date ))
       .attr("y", y_rt(selectedData.rt_median))
     }
@@ -594,7 +600,8 @@ TODO:
     var area_deaths = svg_deaths.append("path")
     
     
-d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv&sheet=NOFO_long').then(function(data) {
+// d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv&sheet=NOFO_long').then(function(data) {
+  d3.csv('https://raw.githubusercontent.com/samhovie/sitefiles/main/NOFO_long.csv').then(function(data) {
   
   // console.log(data)
   
@@ -722,19 +729,25 @@ d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx
       // dataFilter.splice(0, dataFilter.length);
       
            
-      d3.json("/data/rt.json").then(function(data) {
-        // filers NaN and converts strings
-        let parseDate = d3.timeParse("%m/%d/%Y");
-        data = data.filter(function(d){
-          if(isNaN(d.rt_median)){
-            return false;
-          }
-          d.rt_lower = +d.rt_lower;
-          d.rt_median = +d.rt_median;
-          d.rt_upper = +d.rt_upper;
-          d.date = parseDate(d.date);
-          return true;
-        });
+  d3.csv('https://raw.githubusercontent.com/samhovie/sitefiles/main/nu_20201027.csv').then(function(data) {
+    // console.log(data);   
+    // filers NaN and converts strings
+    let parseDate = d3.timeParse("%Y-%m-%d");
+    let today = new Date();
+    data = data.filter(function(d){
+      if(isNaN(d.rt_median) || 
+          d.scenario_name !== 'baseline' ||
+          parseDate(d.date) > today  
+          ){
+        return false;
+      }
+      d.rt_lower = +d.rt_lower;
+      d.rt_median = +d.rt_median;
+      d.rt_upper = +d.rt_upper;
+      d.date = parseDate(d.date);
+      return true;
+    });
+
         
 
     var myColor = d3.scaleOrdinal()
@@ -747,6 +760,7 @@ d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx
                         
       dataFilter = data.filter(function(d){return d.geography_modeled==selectedGroup})
       // dataFilter.append(data.filter(function(d){return d.geography_modeled==selectedGroup}));
+      console.log(dataFilter)
       
       y_rt.domain([0, d3.max(dataFilter, function(d) { return d.rt_upper })])
       y_rt_axis.transition()
@@ -788,8 +802,8 @@ d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx
        
        
 
-d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv&sheet=NOFO_long').then(function(data) {
-  
+// d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx3xw28L2Nflo/gviz/tq?tqx=out:csv&sheet=NOFO_long').then(function(data) {
+  d3.csv('https://raw.githubusercontent.com/samhovie/sitefiles/main/NOFO_long.csv').then(function(data) {
   // console.log(data)
   
   let parseDate = d3.timeParse("%Y-%m-%d");
@@ -835,16 +849,17 @@ d3.csv('https://docs.google.com/spreadsheets/d/1MWNebArAjjTTtJdxQcnUakShSbADhccx
         dict["covidregion_11"] = "Suburban";
         
         
-        selectedGroupCases = dict[selectedGroup]
-        console.log(selectedGroup)
+        var selectedGroupCases = dict[selectedGroup]
+        // console.log(selectedGroup)
         
+        // console.log(selectedGroupCases)
         
         // console.log(data);
         
         // allGroup = d3.map(data, function(d){return(d.geography_modeled)}).keys();
         
         dataFilter = data.filter(function(d){return d.NOFO_Region==selectedGroupCases})
-        // console.log(allGroup);
+        // console.log(dataFilter);
         
         var myColor = d3.scaleOrdinal()
                         .domain(allGroup)
