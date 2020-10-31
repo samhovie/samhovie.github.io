@@ -395,7 +395,7 @@ TODO:
     .append('circle')
       .style("fill", "none")
       .attr("stroke", "black")
-      .attr('r', 8.5)
+      .attr('r', 5.5)
       .style("opacity", 0)
       .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
 
@@ -415,6 +415,7 @@ TODO:
 
   function mousemove() {
     data = data.filter(function(d){return d.geography_modeled==allGroup[0]})
+    var formatTime = d3.timeFormat("%B %d")
     // recover coordinate we need
     console.log(d3.mouse(this)[0])
     var x0 = x_rt.invert(d3.mouse(this)[0]);
@@ -427,7 +428,7 @@ TODO:
       .attr("cx", x_rt(selectedData.date))
       .attr("cy", y_rt(selectedData.rt_median))
     focusText
-      .html("x:" + selectedData.date + "  -  " + "y:" + selectedData.rt_median)
+      .html(" " + formatTime(selectedData.date) + "  -  " + "Rt:" + (selectedData.rt_median).toFixed(4))
       .attr("x", x_rt(selectedData.date ))
       .attr("y", y_rt(selectedData.rt_median))
     }
