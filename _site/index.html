@@ -33,9 +33,9 @@
     padding-top: 65px; 
 }
 
-  .list {
-    width:200px;
-  }
+  /*#navbarNav {*/
+  /*  width:700px;*/
+  /*}*/
 
   </style>
   
@@ -45,7 +45,7 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse buttons" id="navbarNav">
-      <ul class="navbar-nav list">
+      <ul class="navbar-nav list  nav-justified">
         
            <li class="nav-item">
               <a class="nav-link" href="/"  class="current" >Home</a>
@@ -59,23 +59,25 @@
               <a class="nav-link" href="/about.html" >About</a>
             </li>
         
+        
       </ul>
+      <select id="selectButton" class = "dropdown d-block"  ></select>
     </div>
     
     <!--<div class = "container position-relative ">-->
     <!--<div class = "row">-->
-    <!--    <div class = "col drop ">-->
-    <!--        <select id="selectButton" class = "dropdown "  ></select>-->
-    <!--    </div>-->
+        <!--<div class = "col drop ">-->
+            <!--<select id="selectButton" class = "dropdown "  ></select>-->
+        <!--</div>-->
     <!--</div>-->
 <!--</div>-->
 
   </nav>
     <style>
 
-div {
-   border: 1px solid red;
-}
+/*div {*/
+/*   border: 1px solid red;*/
+/*}*/
 
    /*
    TODO:
@@ -86,153 +88,147 @@ div {
    */
    
    /* Extra small devices (phones, 600px and down) */
-   
-   
+   #cases_map {
+      /*z-index: 2;*/
+      position: fixed;
+      z-index: 2;
+   }
+   #rtTitle {
+      height: 200px;
+   }
+   .card {
+      /*position: relative;*/
+      /*z-index: 1;*/
+      /*position: relative;*/
+      border: none;
+      float: right;
+      width: 100%;
+      
+   }
+   #rt_chart{
+       display: inline-block;
+    position: relative;
+    /*width: 100%;*/
+    padding-bottom: 100%;
+    vertical-align: top;
+    overflow: hidden;
+    float:right;
+    
+    }
 @media only screen and (max-width: 339px) {
       body {
          padding-top: 100px;
       }
+      #cases_map {
+         width: 22%;
+         /*border: solid red 1px;*/
+      }
+      #rtTitle {
+         width: 78%;
+         float: right;
+         /*margin-right: 10px;*/
+         
+         /*border: none;*/
+      }
+
+      .card{
+         /*width: 78%;*/
+      }
 }
 
+
+@media only screen and (min-width: 339px) {
+      body {
+         padding-top: 60px;
+      }
       #cases_map {
          width: 20%;
-         border: solid red 1px;
+         /*border: solid red 1px;*/
       }
-/*      #rtTitle{*/
-         /*height: 180px;*/
-         /*position: relative;*/
-/*         width: 80%;*/
-/*         z-index: 1;*/
-         /*position: fixed;*/
-/*         float: right;*/
-         /*padding-right: 10px;*/
-         /*border: solid red 1px;*/
-/*      }*/
-   
-/*   h2 {*/
-/*      min-width: 186px;*/
-/*   }*/
-   
-/*}*/
+       #rtTitle {
+         width: 80%;
+         float: right;
+         /*margin-right: 10px;*/
+         
+         /*border: none;*/
+      }
+            .card{
+         /*width: 80%;*/
+      }
+      /*#selectButton {*/
+      /*   display: inline-block;*/
+      /*}*/
 
-/*@media only screen and (min-width: 340px) {*/
-/*      #cases_map {*/
-/*         height: 150px;*/
-/*         width: 20%;*/
-/*         border: solid red 1px;*/
-/*         z-index: 2;*/
-/*         position: fixed;*/
-/*      }*/
-/*      #rtTitle{*/
-         /*height: 180px;*/
-         /*position: relative;*/
-/*         width: 80%;*/
-/*         z-index: 1;*/
-         /*position: fixed;*/
-/*         float: right;*/
-         /*padding-right: 20px;*/
-         /*border: solid red 1px;*/
-/*      }*/
-   
-/*}*/
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-/*@media only screen and (min-width: 600px) {*/
-/*      #cases_map {*/
-         
-/*         width: 20%;*/
-/*         height: 190px;*/
-/*         border: solid red 1px;*/
-/*         z-index: 2;*/
-/*         position: fixed;*/
-/*      }*/
-/*      #rtTitle{*/
-         /*height: 180px;*/
-         /*position: relative;*/
-/*         width: 80%;*/
-/*         z-index: 1;*/
-         /*position: fixed;*/
-/*         float: right;*/
-/*         padding-right: 10px;*/
-/*         min-width: 250px;*/
-         
-         /*border: solid red 1px;*/
-/*      }*/
+@media only screen and (min-width: 600px) {
+      #cases_map {
+         width: 18%;
+      }
+      #rtTitle {
+         width: 82%;
+      }
    
-/*}*/
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
-/*@media only screen and (min-width: 768px) {*/
-/*      #cases_map {*/
-         
-/*         width: 15%;*/
-/*         margin: 10px;*/
-/*         margin-top: 0px;*/
-/*         height: 220px;*/
-/*         border: solid red 1px;*/
-/*         z-index: 2;*/
-/*         position: fixed;*/
-/*      }*/
-/*      #rtTitle{*/
-         /*height: 180px;*/
-         /*position: relative;*/
-/*         width: 75%;*/
-/*         z-index: 1;*/
-         /*position: fixed;*/
-/*         float: right;*/
-         /*padding-right: 10px;*/
-         /*margin-top: 10px;*/
-/*         min-width: 250px;*/
-/*         margin-right: 5%;*/
-         /*border: solid red 1px;*/
-/*      }*/
-/*      body {*/
-/*         margin: 10px;*/
-/*      }*/
-   
-/*}*/
+@media only screen and (min-width: 768px) {
+      #cases_map {
+         width: 15%;
+      }
+      #rtTitle {
+         width: 85%;
+      }
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
-/*@media only screen and (min-width: 992px) {*/
-  
-/*       #cases_map {*/
+@media only screen and (min-width: 992px) {
+   body{
+      margin-left: 5%;
+      margin-right: 5%;
+   }
+   #cases_map {
+         width: 10%;
+      }
+      #rtTitle {
+         width: 84%;
          
-/*         width: 130px;*/
-/*         height: 220px;*/
-/*         margin: 20px;*/
-/*         margin-top:10px;*/
-/*         border: solid red 1px;*/
-/*         z-index: 2;*/
-/*         position: fixed;*/
-         
-/*      }*/
-/*      #rtTitle{*/
-/*         width: 80%;*/
-/*         z-index: 1;*/
-/*         float: right;*/
-         /*padding: 10px;*/
-/*         min-width: 250px;*/
-/*         margin-right: 2%;*/
-         /*border: solid red 1px;*/
-/*      } */
+      }
+      .card {
+         width: 84%;
+         margin-right: 5%;
+      }
    
-/*}*/
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-/*@media only screen and (min-width: 1200px) {*/
-/*         #rtTitle{*/
-/*         width: 70%;*/
-/*         margin-right: 15%;*/
-         /*border: solid red 1px;*/
-/*      } */
+@media only screen and (min-width: 1200px) {
    
-/*}*/
-
-      /* #cases_map {*/
-      /*    float: left;*/
+      body{
+      margin-left: 5%;
+      margin-right: 10%;
+   }
+   #cases_map {
+         width: 10%;
+      }
+      #rtTitle {
+         width: 80%;
          
-      /*}*/
+      }
+            .card {
+         width: 80%;
+         margin-right: 5%;
+      }
+   /*}      #rt_chart {*/
+         /*width: 80%;*/
+         /*height: 800px;*/
    
+      /*.rtBody {*/
+      /*   height: 400px;*/
+      /*}*/
+      
+}
 
 </style>
 
@@ -248,13 +244,40 @@ div {
 </div>
 
 <!--RT chart -->
-<!--<div class="card "id = "cow">-->
+<!--<div class="container ">-->
+<!--  <div class="container rtBody">-->
+   <!--<div id = "rt_chart"></div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--<div id="container" class="svg-container">-->
+<!--</div>-->
+
+
+<!--RT description body-->
+<!--<div class="card">-->
 <!--  <div class="card-body">-->
 <!--    This is some text within a card body.-->
 <!--  </div>-->
 <!--</div>-->
 
-<!--RT description body-->
+
+<!--Cases chart -->
+<!--<div class="card ">-->
+<!--  <div class="card-body">-->
+<!--    This is some text within a card body.-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--Positivity Rate chart -->
+<!--<div class="card ">-->
+<!--  <div class="card-body">-->
+<!--    This is some text within a card body.-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--Deaths Chart-->
 <!--<div class="card">-->
 <!--  <div class="card-body">-->
 <!--    This is some text within a card body.-->
@@ -263,48 +286,41 @@ div {
   
 <script>
 
-
-
-
-
-/* 
-TODO:
-
--sort regions dropdown
--dotted rt line
--chart layout
--axis titles 
--hover detail
--cases/deaths to bar with average
--google sheets pull 
--multiple lines with legend 
--dropdown button stays to left 
--different color charts 
--reactive height
--remove axis lines - only ticks 
--axis tick labels bigger font 
--axis tick labels font size reactive 
--axis titles centered on axis range, not svg width/height
--import shape from file 
-
-
-*/
-
   /* global d3 */
+  /*global $*/
   
-  // array of regions - TODO: need to sort, move Illinois to front
+  // array of regions 
   let allGroup = ["illinois", "covidregion_1", "covidregion_2", 
-  "covidregion_3", "covidregion_4", "covidregion_5", "covidregion_6", 
-  "covidregion_7", "covidregion_8", "covidregion_9", "covidregion_10", "covidregion_11"]
+                  "covidregion_3", "covidregion_4", "covidregion_5", 
+                  "covidregion_6", "covidregion_7", "covidregion_8", 
+                  "covidregion_9", "covidregion_10", "covidregion_11"]
   
+   // DROPDOWN // 
+   d3.select("#selectButton")
+    .selectAll('myOptions')
+   	.data(allGroup)
+    .enter()
+  	.append('option')
+    .text(function (d) { 
+        if(d == "illinois" ||d == "Illinois" ) {
+            return "Illinois";
+        }
+        d = "Region " + d.substring( d.indexOf('_')+1);
+        return d; 
+    })
+    .attr("value", function (d) { return d; })
+    .attr("class", "dropdown-item")
    var myColor = d3.scaleOrdinal()
                     .domain(allGroup)
                     .range(d3.schemeSet2);
    var lightColors = d3.scaleOrdinal()
                         .domain(allGroup)
                         .range(d3.schemePastel2);
-
-var countyMap = {
+         
+                        
+// MAP //
+                        
+   var countyMap = {
    "ADAMS": {
       "covid_region": 3
    },
@@ -615,56 +631,260 @@ var countyMap = {
       "covid_region": 2
    }
 }
-   
-   
-   // var countyMap = {
-   // "ADAMS": {
-   //    "covid_region": 3
-   // },
-   
+
    d3.select(window)
     		.on("resize", sizeChange);
 
 	var projection = d3.geoAlbers()
-	       .center([0, 38.82])
-       .rotate([89.5,0])
-		.scale(13000);
+	                   .center([0, 38.82])
+	                   .rotate([89.5,0])
+	                   .scale(13000);
 
 	var path = d3.geoPath()
-		.projection(projection);
+	             .projection(projection);
 
 	var svg = d3.select("#cases_map")
-		.append("svg")
-    		.append("g");
+	            .append("svg")
+	            .append("g");
 	
 	d3.json('https://raw.githubusercontent.com/samhovie/sitefiles/main/il-counties.json').then(function(data) {
-	  svg.selectAll("path")
-		.data(data.features)
-	 .enter().append("path")
-	 //initial fill function
-	 .attr("fill", function(d){ 
-	  //  console.log(countyMap[d.properties.COUNTY_NAM].covid_region )
-	    return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-	 })
-	 .attr("stroke", function(d){ 
-	  //  console.log(countyMap[d.properties.COUNTY_NAM].covid_region )
-	    return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-	 })
-	 .attr("stroke-width", "3px")
-		.attr("class", "")
-		.attr("d", path);
+	   svg.selectAll("path")
+	      .data(data.features)
+	      .enter().append("path")
+	      //initial fill function
+	      .attr("fill", function(d){ 
+	         return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+	      })
+	      .attr("stroke", function(d){ 
+	         return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+	      })
+	      .attr("stroke-width", "3px")
+	      .attr("class", "")
+	      .attr("d", path);
 	});
-
+	
 	function sizeChange() {
-	   
 	   projection.translate([ 400, 1000]);
-	    
-	    d3.select("g")
-	    .attr("transform", "scale(" + $("#cases_map").width()/900 + ")");
-	    $("svg").height($("#cases_map").width()*1.618)
-	    
+	   
+	   d3.select("g")
+	     .attr("transform", "scale(" + $("#cases_map").width()/900 + ")");
+	   
+	   $("svg").height($("#cases_map")
+	           .width()*1.618)
 	}
+	
+	
+// 	END MAP //
+
+
+
+  var margin_rt = {top: 10, right: 10, bottom: 100, left: 60};
+  var svg_rt = d3.select("#rt_chart").append("svg")
+
+  var x_rt = d3.scaleTime();
+  var x_rt_axis = svg_rt.append("g");
+  var y_rt = d3.scaleLinear();
+  var y_rt_axis = svg_rt.append("g");
+  
+  var interval_rt = svg_rt.append("path");
+  var line_rt = svg_rt.append('g').append("path");
+                  
+  var refLine = svg_rt.append('g').append("path")
+  
+  var dataFilter = null;   
+	
+   d3.csv('https://raw.githubusercontent.com/samhovie/sitefiles/main/nu_20201027.csv').then(function(data) {
+    // console.log(data);   
+    // filers NaN and converts strings
+    let parseDate = d3.timeParse("%Y-%m-%d");
+    let today = new Date();
+    data = data.filter(function(d){
+      if(isNaN(d.rt_median) || 
+          d.scenario_name !== 'baseline' ||
+          parseDate(d.date) > today  
+          ){
+        return false;
+      }
+      d.rt_lower = +d.rt_lower;
+      d.rt_median = +d.rt_median;
+      d.rt_upper = +d.rt_upper;
+      d.date = parseDate(d.date);
+      return true;
+    });
    
+       x_rt.domain(d3.extent(data, function(d) { return d.date}))
+                  
+    y_rt.domain([0, d3.max(data.filter(function(d){return d.geography_modeled==allGroup[0]}), function(d) { return d.rt_upper })])
+        
+    y_rt_axis.attr("class", "y axis")
+    .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  )
+
+    interval_rt.datum(data.filter(function(d){return d.geography_modeled==allGroup[0]}))
+                      .attr("fill", function(d){ return lightColors(allGroup[0]) })
+                      .attr("stroke", "none")
+                      .attr("transform", "translate(" +(margin_rt.left+1)+" ,0)")  
+
+    
+    line_rt.datum(data.filter(function(d){return d.geography_modeled==allGroup[0]}))
+                  .attr("stroke", function(d){ return myColor(allGroup[0]) })
+                  .attr("transform", "translate(" +(margin_rt.left+1)+" ,0)") 
+                  .style("stroke-width", 2)
+                  .style("fill", "none")
+                  
+                  
+                  
+        refLine.datum(data.filter(function(d){return d.geography_modeled==allGroup[0]}))
+                  .attr("stroke", "black")
+                  .attr("transform", "translate(" +(margin_rt.left+1)+" ,0)") 
+                  .style("stroke-width", 1)
+                  .style("stroke-dasharray", ("3, 3"))
+                  .style("fill", "none") 
+   
+       var xTitle = svg_rt.append("text")
+      .style("text-anchor", "middle")
+      .text("");
+      
+    var yTitle = svg_rt.append("text")
+      .attr("transform", "rotate(-90)")
+      .attr("y", 6)
+      // .attr("x",0 - (height / 2))
+      .attr("dy", "1em")
+      .style("text-anchor", "middle")
+      .text("Rt");    
+      
+      
+      
+        // This allows to find the closest X index of the mouse:
+  var bisect = d3.bisector(function(d) { return d.date; }).left;
+
+  // Create the circle that travels along the curve of chart
+  var focus = svg_rt
+    .append('g')
+    .append('circle')
+      .style("fill", "none")
+      .attr("stroke", "black")
+      .attr('r', 4.5)
+      .style("opacity", 0)
+      .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
+
+  // Create the text that travels along the curve of chart
+  var focusText = svg_rt
+    .append('g')
+    .append('text')
+      .style("opacity", 0)
+      .attr("text-anchor", "left")
+      .attr("alignment-baseline", "middle")
+      .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
+      
+          function mouseover() {
+    focus.style("opacity", 1)
+    focusText.style("opacity",1)
+  }
+
+  function mousemove() {
+    data = data.filter(function(d){return d.geography_modeled==allGroup[0]})
+    var formatTime = d3.timeFormat("%B %d")
+    // recover coordinate we need
+    // console.log(d3.mouse(this)[0])
+    var x0 = x_rt.invert(d3.mouse(this)[0]);
+    // console.log(x0);
+    var i = bisect(data, x0, 1);
+    // console.log(i)
+    
+    selectedData = data[i]
+    focus
+      .attr("cx", x_rt(selectedData.date))
+      .attr("cy", y_rt(selectedData.rt_median))
+    focusText
+      .html("<br>" + formatTime(selectedData.date) + "  " + "Rt:" + (selectedData.rt_median).toFixed(4))
+      .attr("x", x_rt(selectedData.date ))
+      .attr("y", y_rt(selectedData.rt_median))
+    }
+  function mouseout() {
+    focus.style("opacity", 0)
+    focusText.style("opacity", 0)
+  }
+
+    
+    // A function that finishes to draw the chart for a specific device size.
+    function drawChart() {
+      
+      const currentWidth = document.getElementById("rt_chart").offsetWidth;
+      
+      const width = currentWidth- margin_rt.left - margin_rt.right;
+      const height = document.getElementById("rt_chart").offsetHeight;
+      // const height = parseInt(currentWidth * 0.72 ) - margin_rt.top - margin_rt.bottom;
+      
+      // if (currentWidth < 500) {
+      //    height = parseInt(currentWidth * 0.85 ) - margin_rt.top - margin_rt.bottom;
+      // }
+      console.log(height)
+      
+      svg_rt.attr("width", width + margin_rt.left + margin_rt.right)
+      .attr("height", height + margin_rt.top + margin_rt.bottom)
+      .append("g")
+    .attr("transform",
+          "translate(" + margin_rt.left + "," + margin_rt.top + ")");
+      
+      xTitle.attr("transform", "translate(" + (currentWidth/2) + " ," + (height +30)+ ")")
+      yTitle.attr("x",0 - (height / 2))
+      
+      x_rt.range([ 0, width ]);
+      x_rt_axis.attr("transform", "translate(" + margin_rt.left + "," + height + ")")
+      
+      if (currentWidth < 600) {
+         x_rt_axis.call(d3.axisBottom(x_rt).ticks(3));
+      }else {
+         x_rt_axis.call(d3.axisBottom(x_rt).ticks(6));
+      }
+         
+           
+           
+      y_rt.range([ height, 0 ])
+      y_rt_axis.call(d3.axisLeft(y_rt).ticks(6));
+      
+
+      
+      interval_rt
+      .attr("d", d3.area()
+      .x(function(d) { return x_rt(d.date) })
+      .y0(function(d) { return y_rt(d.rt_lower) })
+      .y1(function(d) { return y_rt(d.rt_upper) }))
+      
+      line_rt
+      .attr("d", d3.line()
+      .x(function(d) { return x_rt(d.date) })
+      .y(function(d) { return y_rt(d.rt_median) })
+      )
+      
+      refLine
+        .attr("d", d3.line()
+        .x(function(d) { return x_rt(d.date) })
+        .y(function(d) { return y_rt(1.0) }));
+      
+      svg_rt
+        .append('rect')
+        .style("fill", "none")
+        .style("pointer-events", "all")
+        .attr('width', width)
+        .attr('height', height)
+        .on('mouseover', mouseover)
+        .on('mousemove', mousemove)
+        .on('mouseout', mouseout)
+        .attr("transform", "translate("+ margin_rt.left +","+ 0  + ")"  ); 
+        
+
+
+    }
+    // Initialize the chart
+    drawChart();
+    // console.log("done")
+    // Add an event listener that run the function when dimension change
+    window.addEventListener('resize', drawChart ); 
+    // console.log("hi")
+    
+});
+
 
     d3.select("#selectButton").on("change", function(d) {
       // recover the option that has been chosen

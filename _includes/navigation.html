@@ -4,9 +4,9 @@
     padding-top: 65px; 
 }
 
-  .list {
-    width:200px;
-  }
+  /*#navbarNav {*/
+  /*  width:700px;*/
+  /*}*/
 
   </style>
   
@@ -16,20 +16,22 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse buttons" id="navbarNav">
-      <ul class="navbar-nav list">
+      <ul class="navbar-nav list  nav-justified">
         {% for item in site.data.navigation %}
            <li class="nav-item">
               <a class="nav-link" href="{{ item.link }}" {% if page.url == item.link %} class="current" {% endif %}>{{ item.name }}</a>
             </li>
         {% endfor %}
+        
       </ul>
+      <select id="selectButton" class = "dropdown d-block"  ></select>
     </div>
     
     <!--<div class = "container position-relative ">-->
     <!--<div class = "row">-->
-    <!--    <div class = "col drop ">-->
-    <!--        <select id="selectButton" class = "dropdown "  ></select>-->
-    <!--    </div>-->
+        <!--<div class = "col drop ">-->
+            <!--<select id="selectButton" class = "dropdown "  ></select>-->
+        <!--</div>-->
     <!--</div>-->
 <!--</div>-->
 
