@@ -297,6 +297,9 @@
    //
    
    
+   
+   
+   
    function LightenDarkenColor(col,amt) {
       var usePound = false;
       if ( col[0] == "#" ) {
@@ -712,6 +715,68 @@
 	
 	var bisect = d3.bisector(function(d) { return d.date; }).left;
 	
+		d3.select(window)
+    		.on("resize", sizeChange);
+   
+   		var projection = d3.geoAlbers()
+   		var path = d3.geoPath()
+	
+	
+	var files = ['https://raw.githubusercontent.com/samhovie/sitefiles/main/il-counties.json', 
+	           'https://raw.githubusercontent.com/samhovie/sitefiles/main/nu_20201027.csv',
+	           'https://raw.githubusercontent.com/samhovie/sitefiles/main/NOFO_long.csv']
+	       
+	     //  var files = ["data1.json", "data2.json", "data3.json"];
+var promises = [];
+
+files.forEach(function(url) {
+    if (url.slice(-1) === 'n'){
+       promises.push(d3.json(url))
+    }else{
+       promises.push(d3.csv(url))
+    }
+    
+    
+});
+
+Promise.all(promises).then(function(data) {
+    console.log(data)
+    
+       projection.rotate([89.5,0]).fitSize([map_wid, map_hid], data[0]);
+
+// 	var path = d3.geoPath()
+	             path.projection(projection);
+	   
+	   
+	   svg.selectAll("path")
+	      .data(data[0].features)
+	      .enter().append("path")
+	      //initial fill function
+	      .attr("fill", function(d){ 
+	         return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+	      })
+	      .attr("stroke", function(d){ 
+	         return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+	      })
+	     // .attr("stroke-width", "3px")
+	      .attr("class", "")
+	      .attr("d", path);
+    
+    
+});    
+	 
+// 	Promise.all([
+//     d3.csv("file1.csv"),
+//     d3.csv("file2.csv"),
+// ]).then(function(files) {
+//     // files[0] will contain file1.csv
+//     // files[1] will contain file2.csv
+// }).catch(function(err) {
+//     // handle error here
+// })
+	
+	
+	
 	  // Create the circle that travels along the curve of chart
   var focus = svg_rt
     .append('g')
@@ -767,33 +832,33 @@
 	
 	
 	
-	d3.select(window)
-    		.on("resize", sizeChange);
+// 	d3.select(window)
+//     		.on("resize", sizeChange);
    
-   		var projection = d3.geoAlbers()
-   		var path = d3.geoPath()
-	d3.json('https://raw.githubusercontent.com/samhovie/sitefiles/main/il-counties.json').then(function(data) {
+//    		var projection = d3.geoAlbers()
+//    		var path = d3.geoPath()
+// 	d3.json('https://raw.githubusercontent.com/samhovie/sitefiles/main/il-counties.json').then(function(data) {
 	   
-   projection.rotate([89.5,0]).fitSize([map_wid, map_hid], data);
+//    projection.rotate([89.5,0]).fitSize([map_wid, map_hid], data);
 
-// 	var path = d3.geoPath()
-	             path.projection(projection);
+// // 	var path = d3.geoPath()
+// 	             path.projection(projection);
 	   
 	   
-	   svg.selectAll("path")
-	      .data(data.features)
-	      .enter().append("path")
-	      //initial fill function
-	      .attr("fill", function(d){ 
-	         return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-	      })
-	      .attr("stroke", function(d){ 
-	         return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-	      })
-	     // .attr("stroke-width", "3px")
-	      .attr("class", "")
-	      .attr("d", path);
-	});
+// 	   svg.selectAll("path")
+// 	      .data(data.features)
+// 	      .enter().append("path")
+// 	      //initial fill function
+// 	      .attr("fill", function(d){ 
+// 	         return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+// 	      })
+// 	      .attr("stroke", function(d){ 
+// 	         return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+// 	      })
+// 	     // .attr("stroke-width", "3px")
+// 	      .attr("class", "")
+// 	      .attr("d", path);
+// 	});
 	
 	
 	
@@ -1216,22 +1281,30 @@
                 .append("path")
                 .attr( "d", path )
                 .attr("fill", function(d){ 
-                   if (
-                      countyMap[d.properties.COUNTY_NAM].covid_region !==
-                      parseInt(selectedGroup.split('_')[1])) {
+                  if (selectedGroup.localeCompare("illinois") === 0) {
+                     // console.log('hi')
+                     return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region])
+                  } else {
+                      if (countyMap[d.properties.COUNTY_NAM].covid_region === parseInt(selectedGroup.split('_')[1])) {
                             return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-                        } else {
-                           return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
-                        }
+                     } else {
+                              return "#7E7E7E" 
+                     }
+                  }
 	      })
 	      .attr("stroke", function(d){ 
-	                    if (
-                      countyMap[d.properties.COUNTY_NAM].covid_region !==
+	                 
+	                 if (selectedGroup.localeCompare("illinois") === 0) {
+                     return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region])
+                  } else {
+	                 if (
+                      countyMap[d.properties.COUNTY_NAM].covid_region ===
                       parseInt(selectedGroup.split('_')[1])) {
                             return lightColors(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
                         } else {
-                           return myColor(allGroup[countyMap[d.properties.COUNTY_NAM].covid_region]) 
+                           return "#AAAAAA" 
                         }
+                  }
 	         
 	         
 	         
