@@ -1,0 +1,143 @@
+html {
+    box-sizing: border-box;
+  }
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+    padding: 0;
+  }
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+  html, body {
+    height: 100%;
+    width: 100%;
+  }
+  #car-scene {
+     position: fixed;
+     width: 100%;
+     height: 100%;
+     top: 0%;
+     left: 0;
+     bottom: auto;
+     right: auto;
+     background: none;
+    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+    }
+  #car-scene.top {
+      top: 100%;
+  }
+ #car-scene.bottom {
+    top: -100%;
+  }
+  #car-scene.right {
+    left: -100%;
+  } 
+  #car-scene.left {
+    left: 100%;
+  }
+  button {
+    border: none;
+    background: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #top { 
+    position: absolute;
+    top: 0%;
+    left: 50%;
+  } 
+  #bottom-hide {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    background: none;
+  }
+  #bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+  }
+  #top-hide {
+    position: absolute;
+    bottom: 0%;
+    left: 50%;
+  }
+  #left {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+  }
+  #right-hide {
+    position: absolute;
+    top: 50%;
+    left: 0px;
+  }
+  #right {
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
+  #left-hide {
+    position: absolute;
+    top: 50%;
+    right: 0;
+  }
+  .top-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: -100%;
+    left: 0;
+    bottom: auto;
+    right: auto;
+    background: #000000;
+    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+  }
+  .top-layer.active {
+    top: 0%;
+  }
+  .bottom-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 100%;
+    left: 0;
+    bottom: auto;
+    right: auto;
+    background: #000000;
+    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+  }
+  .bottom-layer.active {
+    top: 0%;
+  }
+  .left-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: auto;
+    left: -100%;
+    bottom: auto;
+    right: auto;
+    background: #000000;
+    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+  }
+  .left-layer.active {
+    left: 0%;
+  }
+  .right-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: auto;
+    left: 100%;
+    bottom: auto;
+    right: auto;
+    background: #000000;
+    transition: all 0.9s cubic-bezier(0.6, 0.05, 0.4, 1);
+  }
+  .right-layer.active {
+    left: 0%;
+  }
