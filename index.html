@@ -1,4 +1,158 @@
 ---
+layout: none
+---
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cowboy Killers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="./style.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js" integrity="sha512-n8IpKWzDnBOcBhRlHirMZOUvEq2bLRMuJGjuVqbzUJwtTsgwOgK5aS0c1JA647XWYfqvXve8k3PtZdzpipFjgg==" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
+  
+  <script type="module" src="OrbitControls.js"></script>
+
+  <!-- <link rel="stylesheet" href="./style.css"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+  
+  </head>
+<!-- <link rel="stylesheet" href="{{ "/assets/2019-11-7-javascript-animate-css-slideshow-in-jekyll/custom.css" | relative_url }}"> -->
+
+
+<!-- <link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"> -->
+
+
+<!-- <button id="top-button"><img src="https://icongr.am/feather/chevron-up.svg"/></button>
+<button id="left-button"><img src="https://icongr.am/feather/chevron-left.svg"/></button>
+<button id="right-button"><img src="https://icongr.am/feather/chevron-right.svg"/></button>
+<button id="bottom-button"><img src="https://icongr.am/feather/chevron-down.svg"/></button> -->
+
+<div class="container">
+    <button id="top-button"><img src="https://icongr.am/feather/chevron-up.svg"/></button>
+<button id="left-button"><img src="https://icongr.am/feather/chevron-left.svg"/></button>
+<button id="right-button"><img src="https://icongr.am/feather/chevron-right.svg"/></button>
+<button id="bottom-button"><img src="https://icongr.am/feather/chevron-down.svg"/></button>
+    <div id = "home" class=" page-0"></div>
+    <div id = "left" class=" page-1 o0"></div>
+    <div id = "bottom" class=" page-1 o0"></div>
+    <div id = "right" class=" page-1 o0"></div>
+    <div id ="top" class =" page-1 o0"></div>
+
+</div>
+<script type="module" src="./script.js"></script>
+<script>
+
+    function animateCSS(element, animationName, callback) {
+        const node = document.querySelector(element)
+        node.classList.add('animated', animationName)
+
+        function handleAnimationEnd() {
+            node.classList.remove('animated', animationName)
+            node.removeEventListener('animationend', handleAnimationEnd)
+            if (typeof callback === 'function') callback(node)
+        }
+        node.addEventListener('animationend', handleAnimationEnd)
+    }
+
+    function transitionSlides(outSlide, outDirection, inSlide, inDirection)  {
+
+        animateCSS(outSlide, outDirection, function () {
+            const node = document.querySelector(outSlide);
+            node.classList.add('o0');
+        });
+
+        const node = document.querySelector(inSlide);
+        node.classList.remove('o0');
+        animateCSS(inSlide, inDirection, null);
+    }
+
+    function getDirections(inSlide, outSlide) {
+        let inDirection = '';
+        let outDirection = '';
+
+        switch (outSlide[1]) {
+            case 't':
+                inDirection = 'slideInUp';
+                outDirection = 'slideOutUp';
+                break;
+            case 'b':
+                inDirection = 'slideInDown';
+                outDirection = 'slideOutDown';
+                break;
+            case 'l':
+                inDirection = 'slideInRight';
+                outDirection = 'slideOutLeft';
+                break;
+            case 'r':
+                inDirection = 'slideInLeft';
+                outDirection = 'slideOutRight';
+                break;
+            case 'h':
+                switch (inSlide[1]) {
+                    case 't':
+                        inDirection = 'slideInDown';
+                        outDirection = 'slideOutDown';
+                        break;
+                    case 'b':
+                        inDirection = 'slideInUp';
+                        outDirection = 'slideOutUp';
+                        break;
+                    case 'l':
+                        inDirection = 'slideInLeft';
+                        outDirection = 'slideOutRight';
+                        break;
+                    case 'r':
+                        inDirection = 'slideInRight';
+                        outDirection = 'slideOutLeft';
+                        break;
+                }
+                break;
+        }
+        return [inDirection, outDirection];
+    }
+
+    const buttons = document.getElementsByTagName("button");
+    for (const button of buttons) {
+        button.addEventListener('click', () => {
+            let buttonId = button.id;
+            let axis = button.className;
+
+            let outSlide = "";
+            let inSlide = "";
+            let directions = [];
+            let outDirection = "";
+            let inDirection = "";
+
+            // if home is hidden 
+            if (document.querySelector('#home').classList.contains('o0')) { // better way to do this? 
+                // buttonId is outSlide
+                outSlide = '#' + (button.id).split('-')[0];
+                // home is inslide
+                inSlide = '#home'
+            // if button page is hidden
+            } else if (document.querySelector('#' + (button.id).split('-')[0]).classList.contains('o0')) {
+                // buttonId is inslide
+                inSlide = '#' + (button.id).split('-')[0];
+                // butttonid is outslide
+                outSlide = '#home'
+            } else {
+                console.log('error:', '#' + (button.id).split('-')[0] );
+            }
+
+            //directions
+            directions = getDirections(inSlide, outSlide);
+            inDirection = directions[0]
+            outDirection = directions[1]
+
+            // console.log('out:', outSlide, outDirection, 'in:', inSlide, inDirection );
+            transitionSlides(outSlide, outDirection, inSlide, inDirection);
+    });
+  }
+    
+</script>
+<!-- ---
 # Feel free to add content and custom Front Matter to this file.
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 ---
@@ -19,7 +173,7 @@
 </head>
 <body>
 
-    <!-- 
+
         Tallboy
 Wax museum 
 Ragsak - hippie
@@ -27,7 +181,7 @@ Darthaniel
 Old Dinglish 
 -->
 
-<div id="car-scene" >
+<!-- <div id="car-scene" >
 
     <button id="top"><img src="https://icongr.am/feather/chevron-up.svg"/></button>
     <button id="bottom"><img src="https://icongr.am/feather/chevron-down.svg"/></button>
@@ -50,4 +204,4 @@ Old Dinglish
   <script type="module" src="./script.js"></script>
 
 </body>
-</html>
+</html> --> 

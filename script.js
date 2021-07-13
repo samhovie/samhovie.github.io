@@ -1,49 +1,4 @@
-const buttons = document.getElementsByTagName("button");
 
-for (const button of buttons) {
-  button.addEventListener('click', () => {
-     var id = button.getAttribute("id");
-     var pane = id.includes('-') ? id.substr(0, id.indexOf('-')) : id;
-    
-     var layerClass = "." + id+ "-layer";
-     var layers = document.querySelectorAll(layerClass);
-    //  console.log(layers.classList)
-
-     var carScene = document.getElementById("car-scene");
-
-     for (const layer of layers) {
-        //  adding class if not there, taking away if it is 
-        // console.log(layer.substr(0,layer.indexOf(' '))) so that 
-        // carScene.classList.toggle(id);
-        
-        carScene.classList.toggle(pane);
-       layer.classList.toggle("active");
-     }
-  });
-}
-
-// const buttons = document.getElementsByTagName("button");
-
-// for (const button of buttons) {
-//     //add click event to all buttons
-//     //adds active class to 
-//   button.addEventListener('click', () => {
-//     var id = button.getAttribute("id");
-
-//     var baseid = str.includes('-') ? str.substr(0, str.indexOf('-')) : str;
-
-
-
-
-    //toggles active class to layer with buddonid before '-' + "-layer"
-    //toggles buttonid before '-' class on carScene
-
-
-//    });
-// }
-
-
-// let scene, camera, renderer;
 let container, scene, camera, renderer;
 
 function init() {
@@ -77,12 +32,8 @@ function init() {
     light4.position.set(-500,300,500);
     scene.add(light4);
 
-    // let container = document.getElementById( 'canvas' );
-// document.body.appendChild( container );
 
-
-
-container = document.getElementById( 'car-scene' );
+container = document.getElementById( 'home' );
 document.body.appendChild( container );
 
 renderer = new THREE.WebGLRenderer({antialias:true});
@@ -90,10 +41,6 @@ renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(window.innerWidth,window.innerHeight);
 container.appendChild( renderer.domElement );
 
-
-    // renderer = new THREE.WebGLRenderer({antialias:true});
-    // renderer.setSize(window.innerWidth,window.innerHeight);
-    // document.body.appendChild(renderer.domElement);
 
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.addEventListener('change', renderer);
@@ -106,7 +53,6 @@ container.appendChild( renderer.domElement );
       let car = gltf.scene.children[0];
       car.scale.set(5,5,5);
       scene.add(gltf.scene);
-    //   renderer.render(scene,camera);
       animate();
     });
   }
