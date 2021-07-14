@@ -6,11 +6,11 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xdddddd);
 
-    camera = new THREE.PerspectiveCamera(35,window.innerWidth/window.innerHeight,1,6000);
+    camera = new THREE.PerspectiveCamera(45,window.innerWidth/window.innerHeight,1,6000);
     camera.rotation.y = 45/180*Math.PI;
-    camera.position.x = 1000;
-    camera.position.y = 200;
-    camera.position.z = 1000;
+    camera.position.x = 2000;
+    camera.position.y =  100;
+    camera.position.z = 50;
 
     let hlight = new THREE.AmbientLight (0x404040,100);
     scene.add(hlight);
