@@ -33,7 +33,7 @@ button {
   } 
   #bottom-button {
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     left: 50%;
   }
   #left-button {
@@ -44,7 +44,7 @@ button {
   #right-button {
     position: absolute;
     top: 50%;
-    right: 0;
+    right: 0px;
   }
 
 .container {
